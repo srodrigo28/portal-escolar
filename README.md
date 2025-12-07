@@ -12,3 +12,6 @@
 
 ## Página de Notas e Boletins
 <img src="./public/preview/lancaNotas.png">
+
+> [!WARNING]
+> OBS: Está usando useStates e localStorage por enquanto
