@@ -183,14 +183,14 @@
       "workload": 3000
     },
     {
-      "id": "dab2",
-      "name": "Inglês",
-      "workload": 2400
-    },
-    {
       "id": "79b1",
       "name": "Filosofia",
       "workload": 1800
+    },
+    {
+      "id": "af7e",
+      "name": "Inglês",
+      "workload": 2400
     }
   ]
 }
