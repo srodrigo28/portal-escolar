@@ -149,14 +149,14 @@ export const AcademicDashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                                 <Tooltip />
                             </PieChart>
                         </ResponsiveContainer>
-                    </div>
-                    <div className="flex justify-center gap-4 mt-4 text-xs text-slate-500">
-                        {distribution.map((entry, index) => (
-                            <div key={index} className="flex items-center gap-1">
-                                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[index % COLORS.length] }}></div>
-                                {entry.name}
-                            </div>
-                        ))}
+                        <div className="flex justify-center gap-4 mt-4 text-xs text-slate-500">
+                            {distribution.map((entry, index) => (
+                                <div key={index} className="flex items-center gap-1">
+                                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[index] }}></div>
+                                    {entry.name}
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </Card>
             </div>

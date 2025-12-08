@@ -9,10 +9,8 @@ import { StaffManager } from './views/StaffManager';
 import { ClassManager } from './views/ClassManager';
 import { Gradebook } from './views/GradeBook';
 import { SubjectManager } from './views/SubjectManager';
-import { Auth } from './views/Auth';
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentView, setCurrentView] = useState<View>(View.DASHBOARD);
 
   const renderView = () => {
@@ -33,10 +31,6 @@ export default function App() {
         return <AcademicDashboard onNavigate={setCurrentView} />;
     }
   };
-
-  if (!isAuthenticated) {
-    return <Auth onLogin={() => setIsAuthenticated(true)} />;
-  }
 
   return (
     <Layout view={currentView} onNavigate={setCurrentView}>
