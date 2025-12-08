@@ -8,6 +8,7 @@ export enum View {
     WIZARD = 'WIZARD',
     DELIVERY = 'DELIVERY',
     ADJUDICATION = 'ADJUDICATION',
+    SUBJECTS = 'SUBJECTS',
 }
 
 export type StaffRole = 'Professor' | 'Administrativo' | 'Limpeza' | 'Segurança' | 'Direção';
@@ -59,4 +60,10 @@ export interface Bid {
     amount: number;
     timestamp: Date;
     isMe?: boolean;
+}
+
+export interface Subject {
+    id: string;
+    name: string;
+    workload: number;
 }

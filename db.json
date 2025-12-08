@@ -160,5 +160,37 @@
       "studentsCount": 0,
       "capacity": 32
     }
+  ],
+  "subjects": [
+    {
+      "id": "1",
+      "name": "Matemática",
+      "workload": 40
+    },
+    {
+      "id": "a517",
+      "name": "Química",
+      "workload": 2400
+    },
+    {
+      "id": "9b96",
+      "name": "Biologia",
+      "workload": 3200
+    },
+    {
+      "id": "5fbc",
+      "name": "Português",
+      "workload": 3000
+    },
+    {
+      "id": "dab2",
+      "name": "Inglês",
+      "workload": 2400
+    },
+    {
+      "id": "79b1",
+      "name": "Filosofia",
+      "workload": 1800
+    }
   ]
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from '../types';
-import { LogOut, Home, Users, GraduationCap, BookOpen, UserCog } from 'lucide-react';
+import { LogOut, Home, Users, GraduationCap, BookOpen, UserCog, Library } from 'lucide-react';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -44,6 +44,13 @@ export const Layout: React.FC<LayoutProps> = ({ children, view, onNavigate }) =>
                         className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${view === View.CLASSES ? 'bg-blue-600 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
                     >
                         <BookOpen size={20} /> Turmas
+                    </button>
+
+                    <button
+                        onClick={() => onNavigate(View.SUBJECTS)}
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${view === View.SUBJECTS ? 'bg-blue-600 text-white' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
+                    >
+                        <Library size={20} /> Disciplinas
                     </button>
 
                     <button

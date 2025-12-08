@@ -8,6 +8,7 @@ import { StudentManager } from './views/StudentManager';
 import { StaffManager } from './views/StaffManager';
 import { ClassManager } from './views/ClassManager';
 import { Gradebook } from './views/GradeBook';
+import { SubjectManager } from './views/SubjectManager';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<View>(View.DASHBOARD);
@@ -24,6 +25,8 @@ export default function App() {
         return <ClassManager />;
       case View.GRADES:
         return <Gradebook />;
+      case View.SUBJECTS:
+        return <SubjectManager />;
       default:
         return <AcademicDashboard onNavigate={setCurrentView} />;
     }
