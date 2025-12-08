@@ -1,5 +1,5 @@
 > [!WARNING]
-> OBS: Está usando useStates e localStorage por enquanto
+> OBS: Está sendo utilizada uma API local para simular as requisições.
 
 ## Página de Dashboard
 <img src="./public/preview/dashboard.png" width="500">
