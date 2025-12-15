@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, Plus, Mail, Phone, Briefcase, X, UserCog, Pencil } from 'lucide-react';
 import { Card } from '../components/ui/Card';
 import { Staff, StaffRole } from '../types';
+import { toast } from 'sonner';
 
 
 
@@ -55,7 +56,7 @@ export const StaffManager: React.FC = () => {
 
   const handleSaveStaff = async () => {
     if (!newName || !newRole) {
-      alert("Por favor, preencha o Nome e o Cargo.");
+      toast.error("Por favor, preencha o Nome e o Cargo.");
       return;
     }
 
@@ -79,9 +80,10 @@ export const StaffManager: React.FC = () => {
         setStaffList(prevList => prevList.map(staff =>
           staff.id === editingId ? savedStaff : staff
         ));
+        toast.success("Funcionário atualizado com sucesso.");
       } catch (err) {
         console.error("Error updating staff:", err);
-        alert("Erro ao atualizar funcionário.");
+        toast.error("Erro ao atualizar funcionário.");
       }
     } else {
       // Create new
@@ -100,9 +102,11 @@ export const StaffManager: React.FC = () => {
         });
         const savedStaff = await res.json();
         setStaffList([...staffList, savedStaff]);
+        toast.success("Funcionário criado com sucesso.");
+        
       } catch (err) {
         console.error("Error creating staff:", err);
-        alert("Erro ao criar funcionário.");
+        toast.error("Erro ao criar funcionário.");
       }
     }
 

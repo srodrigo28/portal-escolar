@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { Card } from '../components/ui/Card';
 import { Subject } from '../types';
+import { toast } from 'sonner';
 
 export const SubjectManager: React.FC = () => {
     const [subjects, setSubjects] = useState<Subject[]>([]);
@@ -57,16 +58,18 @@ export const SubjectManager: React.FC = () => {
                     method: 'DELETE',
                 });
                 setSubjects(subjects.filter(s => s.id !== id));
+                toast.success("Disciplina excluída com sucesso.");
             } catch (err) {
                 console.error("Error deleting subject:", err);
-                alert("Erro ao excluir disciplina.");
+                toast.error("Erro ao excluir disciplina.");
             }
         }
     };
 
     const handleSave = async () => {
         if (!name || !workload) {
-            alert("Por favor, preencha todos os campos.");
+            // alert("Por favor, preencha todos os campos.");
+            toast.error("Por favor, preencha todos os campos.");
             return;
         }
 
@@ -85,9 +88,10 @@ export const SubjectManager: React.FC = () => {
                 });
                 const savedSubject = await res.json();
                 setSubjects(subjects.map(s => s.id === editingId ? savedSubject : s));
+                toast.success("Disciplina atualizada com sucesso.");
             } catch (err) {
                 console.error("Error updating subject:", err);
-                alert("Erro ao atualizar disciplina.");
+                toast.error("Erro ao atualizar disciplina.");
             }
         } else {
             // Create
@@ -99,9 +103,11 @@ export const SubjectManager: React.FC = () => {
                 });
                 const savedSubject = await res.json();
                 setSubjects([...subjects, savedSubject]);
+
+                toast.success("Disciplina criada com sucesso.");
             } catch (err) {
                 console.error("Error creating subject:", err);
-                alert("Erro ao criar disciplina.");
+                toast.error("Erro ao criar disciplina.");
             }
         }
 

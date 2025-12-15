@@ -1,0 +1,109 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Aluno {
+  id             String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  nome           String?
+  cpf            String?
+  dataNascimento DateTime? @map("data_nascimento") @db.Date
+  telefone       String?
+  email          String?
+  endereco       String?
+  idTurma        String?   @default(dbgenerated("gen_random_uuid()")) @map("id_turma") @db.Uuid
+  createdAt      DateTime  @default(now()) @map("created_at") @db.Timestamptz
+
+  matriculas Matricula[]
+
+  @@map("alunos_sch")
+}
+
+model Funcionario {
+  id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  nome         String?
+  cpf          String?
+  telefone     String?
+  email        String?
+  cargo        String?
+  salario      Decimal?  @db.Decimal
+  dataAdmissao DateTime? @map("data_admissao") @db.Date
+  ativo        Boolean?
+  createdAt    DateTime  @default(now()) @map("created_at") @db.Timestamptz
+
+  turmasDisciplinas TurmaDisciplina[]
+
+  @@map("funcionarios_sch")
+}
+
+model Turma {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  nome      String?
+  serie     String?
+  turno     String?
+  anoLetivo Int?     @map("ano_letivo") @db.SmallInt
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  matriculas        Matricula[]
+  turmasDisciplinas TurmaDisciplina[]
+
+  @@map("turmas_sch")
+}
+
+model Usuario {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  nome      String?
+  email     String?
+  senha     String?
+  tipo      String?
+  ativo     Boolean?
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  @@map("usuarios_sch")
+}
+
+model Disciplina {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  nome         String?
+  cargaHoraria Decimal? @map("carga_horaria") @db.Decimal
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  turmasDisciplinas TurmaDisciplina[]
+
+  @@map("disciplinas_sch")
+}
+
+model Matricula {
+  id        BigInt   @id @default(autoincrement())
+  idAluno   String?  @map("id_aluno") @db.Uuid
+  idTurma   String?  @map("id_turma") @db.Uuid
+  anoLetivo Decimal? @map("ano_letivo") @db.Decimal
+  status    String?
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  aluno Aluno? @relation(fields: [idAluno], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "matriculas_sch_id_aluno_fkey")
+  turma Turma? @relation(fields: [idTurma], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "matriculas_sch_id_turma_fkey")
+
+  @@map("matriculas_sch")
+}
+
+model TurmaDisciplina {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  idTurma       String?  @map("id_turma") @db.Uuid
+  idDisciplina  String?  @map("id_disciplina") @db.Uuid
+  idFuncionario String?  @map("id_funcionario") @db.Uuid
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  turma       Turma?       @relation(fields: [idTurma], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "turmas_disciplinas_sch_id_turma_fkey")
+  disciplina  Disciplina?  @relation(fields: [idDisciplina], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "turmas_disciplinas_sch_id_disciplina_fkey")
+  funcionario Funcionario? @relation(fields: [idFuncionario], references: [id], onDelete: Cascade, onUpdate: Cascade, map: "turmas_disciplinas_sch_id_funcionario_fkey")
+
+  @@map("turmas_disciplinas_sch")
+}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, Plus, Filter, MoreHorizontal, User, X, CheckCircle, Ban, ArrowRightLeft, Pencil } from 'lucide-react';
 import { Card } from '../components/ui/Card';
 import { Student } from '../types';
+import { toast } from 'sonner';
 
 export const StudentManager: React.FC = () => {
   // Initialize state
@@ -86,9 +87,11 @@ export const StudentManager: React.FC = () => {
         const savedStudent = await res.json();
 
         setStudents(students.map(s => s.id === editingId ? savedStudent : s));
+
+        toast.success("Aluno atualizado com sucesso.");
       } catch (err) {
         console.error("Error updating student:", err);
-        alert("Erro ao atualizar aluno.");
+        toast.error("Erro ao atualizar aluno.");
       }
     } else {
       // Create new student
@@ -110,9 +113,10 @@ export const StudentManager: React.FC = () => {
         });
         const savedStudent = await res.json();
         setStudents([...students, savedStudent]);
+        toast.success("Aluno criado com sucesso.");
       } catch (err) {
         console.error("Error creating student:", err);
-        alert("Erro ao criar aluno.");
+        toast.error("Erro ao criar aluno.");
       }
     }
 

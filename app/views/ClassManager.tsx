@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Users, User, ArrowRight, Plus, X, GraduationCap } from 'lucide-react';
 import { Card } from '../components/ui/Card';
 import { SchoolClass, Student, Staff } from '../types';
+import { toast } from 'sonner';
 
 export const ClassManager: React.FC = () => {
   // Load Classes
@@ -35,7 +36,7 @@ export const ClassManager: React.FC = () => {
 
   const handleAddClass = async () => {
     if (!className || !teacherName || !capacity) {
-      alert("Por favor, preencha todos os campos.");
+      toast.error("Por favor, preencha todos os campos.");
       return;
     }
 
@@ -54,9 +55,10 @@ export const ClassManager: React.FC = () => {
       });
       const savedClass = await res.json();
       setClasses([...classes, savedClass]);
+      toast.success("Turma criada com sucesso.");
     } catch (err) {
       console.error("Error creating class:", err);
-      alert("Erro ao criar turma.");
+      toast.error("Erro ao criar turma.");
     }
 
     // Reset and close
