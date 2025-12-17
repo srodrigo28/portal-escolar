@@ -1,6 +1,8 @@
 > [!WARNING]
 > OBS: Está sendo utilizada uma API local para simular as requisições.
 
+## React
+
 ## Página de Dashboard
 <img src="./public/preview/dashboard.png" width="500">
 
